@@ -1,6 +1,4 @@
 # RDKit-molecule-editor
-A lightweight RDKit-based toolkit for interactively editing molecular structures. This tool provides an intuitive workflow for renumbering atoms, selecting molecular fragments, and extracting substructures while preserving the original molecule.
-
 This project provides a simple workflow for editing molecules stored in SDF format. It renumbers atom indices using molecular connectivity, allows interactive atom selection, and exports the selected fragment as a new SDF file.
 
 ---
