@@ -5,15 +5,25 @@ This project provides a simple workflow for editing molecules stored in SDF form
 
 ## Features
 
-- 📂 Load molecules directly from SDF files
-- 🔢 Renumber atom indices using Breadth-First Search (BFS)
-- 👀 Visualize atom indices for easy inspection
-- ✍️ Select atoms using intuitive range expressions (e.g. `0-10`, `0-5, 10, 15-20`)
-- ✂️ Extract selected atoms as a molecular fragment
-- 💾 Export the fragment as a new SDF file
-- 🔒 Preserve the original molecule throughout the workflow
+- 🔢 **DFS-based atom renumbering**
+  - Renumber atoms using deterministic Depth-First Search (DFS).
+  - Useful for graph-based molecular representations.
+
+- 🖼️ **Atom index visualization**
+  - Display atom indices directly on the molecular structure.
+  - Easy identification of atoms for editing.
+
+- ✂️ **Interactive pharmacophore extraction**
+  - Select atoms to retain using a simple input format. (e.g. 0-5,8,10-14)
+
+- 🧪 **Chemical sanitization**
+  - Automatically sanitizes the edited molecule before export.
+
+- 💾 **SDF export**
+  - Save the edited molecule as an SDF file for further analysis.
 
 ---
+
 
 ## Workflow
 
@@ -24,7 +34,7 @@ Input SDF
 Load molecule
     │
     ▼
-Renumber atom indices (BFS)
+Renumber atom indices (DFS)
     │
     ▼
 Visualize atom indices
@@ -74,13 +84,16 @@ The notebook will automatically load:
 
 ---
 
-### 2. Choose the BFS starting atom
+### 2. Renumber atoms
 
-```python
-renumbered_mol = renumber_by_bfs(mol, start_atom=0)
-```
+The notebook automatically performs DFS-based atom renumbering.
 
-Changing the starting atom changes the numbering order, making it easier to select contiguous fragments.
+This provides a deterministic atom ordering that can be useful for:
+
+- graph neural networks
+- pharmacophore generation
+- molecular editing
+- reproducible atom indexing
 
 ---
 
@@ -88,9 +101,13 @@ Changing the starting atom changes the numbering order, making it easier to sele
 
 The notebook generates a 2D depiction with atom numbers.
 
+Use the displayed indices to determine which atoms should be retained.
+
 ---
 
 ### 4. Select atoms to keep
+
+Input atoms using ranges and comma-separated values.
 
 Input examples:
 
@@ -122,31 +139,21 @@ For example,
 
 ---
 
-## Functions
+## Notes
 
-### `renumber_by_bfs()`
-
-Renumber atom indices according to molecular connectivity using Breadth-First Search.
-
-### `parse_atom_indices()`
-
-Convert user-friendly range expressions into a list of atom indices.
-
-Example:
-
-```
-0-5, 10, 20-22
-```
-
-↓
+- Hydrogen atoms are preserved if present in the input structure.
+- Molecules are initially loaded with
 
 ```python
-[0, 1, 2, 3, 4, 5, 10, 20, 21, 22]
+sanitize=False
+removeHs=False
 ```
 
-### `keep_atoms()`
+to preserve the original structure.
 
-Extract a molecular fragment by preserving only the selected atom indices.
+- The edited molecule is sanitized before export.
+
+- Atom numbering after editing follows the DFS-renumbered structure.
 
 ---
 
