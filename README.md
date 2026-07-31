@@ -34,7 +34,7 @@ It is particularly useful for medicinal chemistry, pharmacophore modeling, fragm
 Clone the repository:
 
 ```bash
-git clone https://github.com/good-boy-twist/MolFragmenter.git
+git clone https://github.com/good-boy-twist/RDKit-molecule-editor.git
 cd MolFragmenter
 ```
 
