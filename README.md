@@ -35,7 +35,7 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/good-boy-twist/RDKit-molecule-editor.git
-cd MolFragmenter
+cd RDKit-molecule-editor
 ```
 
 Install RDKit using conda:
